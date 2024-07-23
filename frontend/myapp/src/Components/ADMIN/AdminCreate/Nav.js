@@ -36,7 +36,6 @@ function ResponsiveAppBar() {
   };
  
   return (
-    //small commenting 
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
