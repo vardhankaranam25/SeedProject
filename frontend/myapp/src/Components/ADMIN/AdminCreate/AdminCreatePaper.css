@@ -30,7 +30,7 @@ body {
     max-width: 500px; 
     margin: auto;
     flex-grow: 1; 
-    background-image: linear-gradient(rgba(215, 231, 220, 0.9), rgb(255, 255, 255,0.7)), url('https://cdn.dribbble.com/users/2317423/screenshots/11178230/farming_vector_illustration__4x.jpg');
+    background-image: linear-gradient(rgba(232, 240, 234, 0.9), rgb(255, 255, 255,0.7)), url('https://cdn.dribbble.com/users/2317423/screenshots/11178230/farming_vector_illustration__4x.jpg');
     background-size: cover; 
     background-position: center; 
     background-color: aquamarine;
