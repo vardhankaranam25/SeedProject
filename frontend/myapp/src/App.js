@@ -4,14 +4,16 @@ import CreateUser from './Components/ADMIN/AdminCreateUser/CreateUser';
 import Create from './Components/Scientist/Create/Create';
 import Update from './Components/Scientist/Update/Update';
 import CreateAdmin from './Components/ADMIN/AdminCreate/CreateAdmin';
+import ResponsiveAppBar from "./Components/ADMIN/AdminCreate/Nav";
 
 
 function App() {
   return (
-    <div className="App">
-      <Update></Update>
-    </div>
+    <><ResponsiveAppBar></ResponsiveAppBar><div className="App">
+      <CreateAdmin></CreateAdmin>
+    </div></>
   );
 }
 
 export default App;
+
