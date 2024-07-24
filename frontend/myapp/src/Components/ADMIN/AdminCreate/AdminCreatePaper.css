@@ -1,0 +1,10 @@
+
+
+.ubox {
+    display: flex;
+    flex-direction: column;
+}
+
+.sname {
+    background-color: aqua;
+}
