@@ -18,10 +18,9 @@ const LoginPage = () => {
   const [role, setRole] = useState(roles[0].id);
   const [isNameEmpty, setIsNameEmpty] = useState(false);
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
-  const onSubmit = async (event) => {//funtion onLogout () {jwt.remove();navigate('login')}
+  const onSubmit = async (event) => {
     event.preventDefault();
     if (userName === '' || password === '') {
       alert("Enter Your Credentials!!!");
@@ -31,11 +30,12 @@ const LoginPage = () => {
           userName,
           password
         });
-        console.log(response)
         if (response.data.success) {
           console.log("Login success");
-          setIsLoggedIn(true);
-          navigate(`/${role}/${userName}/`);//navigate('/login')
+          sessionStorage.setItem('isLoggedIn', true);
+          sessionStorage.setItem('userName', userName);
+          sessionStorage.setItem('role', role);
+          navigate(`/${role}/${userName}/`);
         } else {
           alert("Invalid Credentials!");
         }
@@ -73,8 +73,9 @@ const LoginPage = () => {
     }
   };
 
-  if (isLoggedIn) {
-    return <Navigate to={`/${role}/${userName}/`} />
+  // Redirect to the home page if logged in
+  if (sessionStorage.getItem('isLoggedIn')) {
+    return <Navigate to={`/${sessionStorage.getItem('role')}/${sessionStorage.getItem('userName')}/`} />
   }
 
   return (
