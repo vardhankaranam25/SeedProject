@@ -1,152 +1,136 @@
-import { Component } from "react"
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
-import './index.css'
+import React, { useState } from "react";
+import { useNavigate, Navigate } from "react-router-dom";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import axios from 'axios';
+import './index.css';
 
 const roles = [
-  {id: 'USER',displayText: 'User'},
-  {id: 'SCIENTIST',displayText: 'Scientist'},
-  {id: 'ANALYST',displayText: 'Analyst'},
-  {id: 'ADMIN',displayText: 'Admin'},
-]
+  { id: 'user', displayText: 'User' },
+  { id: 'scientist', displayText: 'Scientist' },
+  { id: 'analyst', displayText: 'Analyst' },
+  { id: 'admin', displayText: 'Admin' },
+];
 
-class LoginPage extends Component{
-  state = {
-    userName: '',
-    password: '',
-    role: roles[0].id,
-    isNameEmpty: false,
-    isPasswordEmpty: false,
-  }
+const LoginPage = () => {
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState(roles[0].id);
+  const [isNameEmpty, setIsNameEmpty] = useState(false);
+  const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
-  onSubmit = event => {
-    event.preventDefault()
-    const {userName,password, role} = this.state
-    if(userName === '' || password === '') {
-      alert("Enter Your Credentials!!!")
+  const onSubmit = async (event) => {//funtion onLogout () {jwt.remove();navigate('login')}
+    event.preventDefault();
+    if (userName === '' || password === '') {
+      alert("Enter Your Credentials!!!");
     } else {
-      if (role === 'USER') {
-        const userDetails = {
+      try {
+        const response = await axios.post('http://localhost:3000/login', {
           userName,
-          password,
-          role,
+          password
+        });
+        console.log(response)
+        if (response.data.success) {
+          console.log("Login success");
+          setIsLoggedIn(true);
+          navigate(`/${role}/${userName}/`);//navigate('/login')
+        } else {
+          alert("Invalid Credentials!");
         }
-        console.log(userDetails)
-      } else if (role === 'ADMIN') {
-        const adminDetails = {
-          userName,
-          password,
-          role,
-        }
-        console.log(adminDetails)
-      } else if (role === 'ANALYST') {
-        const analystDetails = {
-          userName,
-          password,
-          role,
-        }
-        console.log(analystDetails)
-      } else if (role === 'SCIENTIST') {
-        const adminDetails = {
-          userName,
-          password,
-          role,
-        }
-        console.log(adminDetails)
+      } catch (error) {
+        console.error("Error during login:", error);
       }
-      this.setState({userName: '', password: '', role: roles[0].id})
     }
-  }
+  };
 
-  onChangeUSername = event => {
-    this.setState({userName: event.target.value})
-    console.log("on change name")
-  }
+  const onChangeUsername = (event) => {
+    setUserName(event.target.value);
+  };
 
-  onChangePassword = event => {
-    this.setState({password: event.target.value})
-  }
+  const onChangePassword = (event) => {
+    setPassword(event.target.value);
+  };
 
-  onChangeRole = event => {
-    this.setState({role: event.target.value})
-  }
+  const onChangeRole = (event) => {
+    setRole(event.target.value);
+  };
 
-  onBlurName = () => {
-    const {userName} = this.state
-    if(userName === '') {
-      this.setState({isNameEmpty: true})
+  const onBlurName = () => {
+    if (userName === '') {
+      setIsNameEmpty(true);
     } else {
-      this.setState({isNameEmpty: false})
+      setIsNameEmpty(false);
     }
-  }
+  };
 
-  onBlurPassword = () => {
-    const {password} = this.state
-    if(password === '') {
-      this.setState({isPasswordEmpty: true})
+  const onBlurPassword = () => {
+    if (password === '') {
+      setIsPasswordEmpty(true);
     } else {
-      this.setState({isPasswordEmpty: false})
+      setIsPasswordEmpty(false);
     }
+  };
+
+  if (isLoggedIn) {
+    return <Navigate to={`/${role}/${userName}/`} />
   }
 
-  render(){
-    const {userName, password, role, isNameEmpty, isPasswordEmpty} = this.state
-    console.log("rendering")
-    return (
-      <div className="login-pg-container">
-        <form className="login-card-container" onSubmit={this.onSubmit}>
-          <h1 className="main-heading">Log in</h1>
-          <div className="input-text">
-            <TextField
-              id="outlined-required"
-              label="name"
-              type="text"
-              placeholder="Enter Your Name"
-              autoComplete="off"
-              onChange={this.onChangeUSername}
-              value={userName}
-              className="input-text" 
-              onBlur={this.onBlurName}
-            />
-            {isNameEmpty ? <p className="error-msg">Enter the Name</p> : null}
-          </div>
-          <div className="input-text">
-            <TextField
-              id="outlined-password-input"
-              label="password"
-              type="password"
-              value={password}
-              placeholder="Enter your Password"
-              autoComplete="current-password"
-              onChange={this.onChangePassword}
-              className="input-text" 
-              onBlur={this.onBlurPassword}
-            />
-            {isPasswordEmpty ? <p className="error-msg">Enter the Password</p> : null}
-          </div>
-          <div className="input-text">
-            <select
-              id="outlined-select-option"
-              value={role}
-              className="select-role"
-              onChange={this.onChangeRole}
-            >
-              {roles.map((name) => (
-                <option
-                  key={name.id}
-                  value={name.id}
-                  className="options"
-                >
-                  {name.displayText}
-                </option>
-              ))}
-            </select>
-          </div>
-          <Button type="submit" variant="contained" size="medium">Submit</Button>
-        </form>
+  return (
+    <div className="login-pg-container">
+      <form className="login-card-container" onSubmit={onSubmit}>
+        <h1 className="main-heading">Log in</h1>
+        <div className="input-text">
+          <TextField
+            id="outlined-required"
+            label="name"
+            type="text"
+            placeholder="Enter Your Name"
+            autoComplete="off"
+            onChange={onChangeUsername}
+            value={userName}
+            className="input-text"
+            onBlur={onBlurName}
+          />
+          {isNameEmpty ? <p className="error-msg">Enter the Name</p> : null}
+        </div>
+        <div className="input-text">
+          <TextField
+            id="outlined-password-input"
+            label="password"
+            type="password"
+            value={password}
+            placeholder="Enter your Password"
+            autoComplete="current-password"
+            onChange={onChangePassword}
+            className="input-text"
+            onBlur={onBlurPassword}
+          />
+          {isPasswordEmpty ? <p className="error-msg">Enter the Password</p> : null}
+        </div>
+        <div className="input-text">
+          <select
+            id="outlined-select-option"
+            value={role}
+            className="select-role"
+            onChange={onChangeRole}
+          >
+            {roles.map((name) => (
+              <option
+                key={name.id}
+                value={name.id}
+                className="options"
+              >
+                {name.displayText}
+              </option>
+            ))}
+          </select>
+        </div>
+        <Button type="submit" variant="contained" size="medium">Submit</Button>
+      </form>
     </div>
-    )
-  }
+  );
 }
 
-export default LoginPage
+export default LoginPage;
