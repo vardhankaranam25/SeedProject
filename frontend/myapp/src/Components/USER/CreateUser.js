@@ -4,6 +4,8 @@ import { GrSearch } from "react-icons/gr";
 //import DrawerAppBar from "./Nav";
 import './CreateUser.css' 
 import DataItem from "./DataItem";
+import { Navigate } from "react-router";
+//import { Link } from "react-router-dom";
 
 const dataList = [
 {
@@ -68,6 +70,10 @@ export default class CreateUser extends Component {
     const searchResults = viewList.filter(eachUser =>
         eachUser.title.includes(searchInput.toLowerCase())
       )
+    const sessionUserName = sessionStorage.getItem('userName')
+    if(sessionUserName === null ) {
+        return <Navigate to="/login" />
+    }
     return(
         <div>
            <ResponsiveAppBar></ResponsiveAppBar>
