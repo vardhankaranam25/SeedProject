@@ -74,7 +74,7 @@ const LoginPage = () => {
   };
 
   // Redirect to the home page if logged in
-  if (sessionStorage.getItem('isLoggedIn')) {
+  if (sessionStorage.getItem('isLoggedIn') && sessionStorage.getItem('userName')!==null) {
     return <Navigate to={`/${sessionStorage.getItem('role')}/${sessionStorage.getItem('userName')}/`} />
   }
 
