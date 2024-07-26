@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    padding: 110;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    background-image:linear-gradient(rgba(255, 255, 255, 0.2), rgba(249, 245, 245, 0.2)),  url('https://wallpapercave.com/wp/wp3228062.png');
+    background-size: cover; 
+    
+  }
+  
+  .ubox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 140px;
+    gap: 30px; 
+    max-width: 500px; 
+    margin: auto;
+    flex-grow: 1; 
+    background-image: linear-gradient(rgba(232, 240, 234, 0.9), rgb(255, 255, 255,0.7)), url('https://cdn.dribbble.com/users/2317423/screenshots/11178230/farming_vector_illustration__4x.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-color: aquamarine;
+  }
+  
+  .sname {
+    margin-bottom: 20px;
+  }
+  
+  .ubox > * {
+    width: 100%;
+    margin-bottom: 1020px;
+  }
+  
+  .ubox button[type="Create"] {
+    background-color: #1976d2; 
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .ubox button[type="Create"]:hover {
+    background-color: #1565c0;
+  }

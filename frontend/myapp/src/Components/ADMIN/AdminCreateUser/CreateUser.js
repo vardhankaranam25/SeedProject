@@ -5,9 +5,7 @@ import CreateUserPaper from "./Paper";
 export default function CreateUser() {
     return(
         <>
-        <ResponsiveAppBar></ResponsiveAppBar>
         <CreateUserPaper></CreateUserPaper>
         </>
-        //small
     )
 }
