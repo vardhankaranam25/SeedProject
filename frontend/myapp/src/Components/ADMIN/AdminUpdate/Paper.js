@@ -3,9 +3,9 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import './UpdateAdmin.css';
 
-
-export default function AdminUpdatePaper() {
+export default function UpdateAdmin() {
   return (
     <Box
       sx={{
@@ -18,15 +18,38 @@ export default function AdminUpdatePaper() {
         },
       }}
     >
-    
       <Paper elevation={8}>
-      <TextField id="outlined-basic" label="StudentID" variant="outlined" />
-      <TextField id="outlined-basic" label="StudentName" variant="outlined" />
-      <TextField id="outlined-basic" label="StudentRollNo" variant="outlined" />
-      <TextField id="outlined-basic" label="StudentBranch" variant="outlined" />
-      <Button variant="text">Submit</Button>
+        <div className='ubox'>
+        <TextField
+            id="outlined-basic"
+            label="StudentID"
+            variant="outlined"
+            className='sname'
+          />
+          <TextField
+            id="outlined-basic"
+            label="Student Name"
+            variant="outlined"
+            className='sname'
+          />
+          <TextField
+            id="outlined-basic"
+            label="Student Roll No"
+            variant="outlined"
+          />
+          <TextField
+            id="outlined-basic"
+            label="Student Branch"
+            variant="outlined"
+          />
+          <Button
+            variant="contained"
+            className='submit-btn'
+          >
+            Submit
+          </Button>
+        </div>
       </Paper>
-      
     </Box>
   );
 }
