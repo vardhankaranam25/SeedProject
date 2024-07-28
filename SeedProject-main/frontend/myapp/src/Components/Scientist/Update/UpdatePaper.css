@@ -1,0 +1,10 @@
+
+
+.id {
+    background-color: black;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+}
