@@ -3,8 +3,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import '/Users/vardhankaranam/.ssh/SeedProject/frontend/myapp/src/Components/ADMIN/AdminCreate/AdminCreatePaper.css';
-
+import './AdminCreatePaper.css';
 
 export default function SimplePaper() {
   return (
@@ -19,16 +18,32 @@ export default function SimplePaper() {
         },
       }}
     >
-    
       <Paper elevation={8}>
-      <div className='ubox'>
-      <TextField id="outlined-basic" label="StudentName" variant="outlined" className='sname'/>
-      <TextField id="outlined-basic" label="StudentRollNo" variant="outlined" />
-      <TextField id="outlined-basic" label="StudentBranch" variant="outlined" />
-      <Button variant="text">Submit</Button>
-      </div>
+        <div className='ubox'>
+          <TextField
+            id="outlined-basic"
+            label="Student Name"
+            variant="outlined"
+            className='sname'
+          />
+          <TextField
+            id="outlined-basic"
+            label="Student Roll No"
+            variant="outlined"
+          />
+          <TextField
+            id="outlined-basic"
+            label="Student Branch"
+            variant="outlined"
+          />
+          <Button
+            variant="contained"
+            className='submit-btn'
+          >
+            Submit
+          </Button>
+        </div>
       </Paper>
-      
     </Box>
   );
 }

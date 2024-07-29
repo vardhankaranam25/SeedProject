@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
+import './AdminDeletePaper.css';
 
 export default function AdminDeletePaper() {
   return (
@@ -18,12 +18,22 @@ export default function AdminDeletePaper() {
         },
       }}
     >
-    
       <Paper elevation={8}>
-      <TextField id="outlined-basic" label="StudentID" variant="outlined" />
-      <Button variant="text">Delete</Button>
+        <div className='ubox'>
+          <TextField
+            id="outlined-basic"
+            label="StudentID"
+            variant="outlined"
+            className='sname'
+          />
+          <Button
+            variant="contained"
+            className='submit-btn'
+          >
+            Delete
+          </Button>
+        </div>
       </Paper>
-      
     </Box>
   );
 }

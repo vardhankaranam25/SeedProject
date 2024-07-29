@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
+import './AdminCreateUser.css';
 
 export default function CreateUserPaper() {
   return (
@@ -18,14 +18,32 @@ export default function CreateUserPaper() {
         },
       }}
     >
-    
       <Paper elevation={8}>
-      <TextField id="outlined-basic" label="Username" variant="outlined" />
-      <TextField id="outlined-basic" label="Password" variant="outlined" />
-      <TextField id="outlined-basic" label="Role" variant="outlined" />
-      <Button variant="text">Create</Button>
+        <div className='ubox'>
+          <TextField
+            id="outlined-basic"
+            label="Username"
+            variant="outlined"
+            className='sname'
+          />
+          <TextField
+            id="outlined-basic"
+            label="Password"
+            variant="outlined"
+          />
+          <TextField
+            id="outlined-basic"
+            label="Role"
+            variant="outlined"
+          />
+          <Button
+            variant="contained"
+            className='submit-btn'
+          >
+            Create
+          </Button>
+        </div>
       </Paper>
-      
     </Box>
   );
 }
