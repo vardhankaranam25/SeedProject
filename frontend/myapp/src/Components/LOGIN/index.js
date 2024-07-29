@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import axios from 'axios';
+//import axios from 'axios';
 import './index.css';
 
 const roles = [
@@ -19,22 +19,40 @@ const LoginPage = () => {
   const [isNameEmpty, setIsNameEmpty] = useState(false);
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
   const navigate = useNavigate();
+  console.log('fdf')
+  /*useEffect(() => {
+    console.log('start')
+    fetch('/login')
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => {
+      console.error("show: ",error)
+    })
+  }, []);*/
 
   const onSubmit = async (event) => {
+    
     event.preventDefault();
     if (userName === '' || password === '') {
       alert("Enter Your Credentials!!!");
     } else {
       try {
-        const response = await axios.post('http://localhost:3000/login', {
-          userName,
-          password
+        const response = await fetch('http://localhost:3000/login?name=' + userName + '&pass=' + password, {
+          // userName,
+          // password,
+          // isLogined: sessionStorage.setItem('isLoggedIn', false),
+          method: 'GET'
         });
-        if (response.data.success) {
+        const resp = await response.json();
+        
+        if (resp == "success") {
+      
           console.log("Login success");
           sessionStorage.setItem('isLoggedIn', true);
           sessionStorage.setItem('userName', userName);
           sessionStorage.setItem('role', role);
+
           navigate(`/${role}/${userName}/`);
         } else {
           alert("Invalid Credentials!");
@@ -80,7 +98,7 @@ const LoginPage = () => {
 
   return (
     <div className="login-pg-container">
-      <form className="login-card-container" onSubmit={onSubmit}>
+      <form className="login-card-container" >
         <h1 className="main-heading">Log in</h1>
         <div className="input-text">
           <TextField
@@ -128,7 +146,7 @@ const LoginPage = () => {
             ))}
           </select>
         </div>
-        <Button type="submit" variant="contained" size="medium">Submit</Button>
+        <Button type="submit" variant="contained" size="medium" onClick={onSubmit}>Submit</Button>
       </form>
     </div>
   );
